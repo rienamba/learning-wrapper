@@ -1,0 +1,32 @@
+@charset "UTF-8";
+/*Learning Wrapper admin - */
+
+/*Hides "Add the icon manually here by default "*/
+.icon_manual{
+display:none;
+}
+#video_wrapper{
+color:red;
+}
+
+/*Metabox Styling*/
+#repeatable-fieldset-one ul {
+background-color: #EDEDED;
+border:1px solid ;
+border-color:#D6D6D6;
+}
+
+#repeatable-fieldset-one ul li{
+    padding-left:20px;
+}
+
+.sort{
+background-color:#D6D6D6;
+padding-left:5px;
+padding-top:5px;
+padding-bottom:5px;
+margin-bottom:10px;
+font-size:14px;
+font-family:georgia;
+cursor:move;
+	}
