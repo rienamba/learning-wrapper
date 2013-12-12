@@ -84,12 +84,17 @@ function register_wrapper_style(){
         "normal", // $context  
         "high"//$priority
 		); 
-		add_meta_box( 'repeatable-fields', 'Audio Playlist', 'repeatable_meta_box_display', 'Learning_Wrapper', 'normal', 'high');
+		add_meta_box( 'repeatable-fields', 'Add Wrapper', 'repeatable_meta_box_display', 'Learning_Wrapper', 'normal', 'high');
 
  	
 		} 
 
 /*Video Wrapper Metabox*/
+
+
+
+/*Dropdown function */
+
 function video_wrapper() {
 
 global $post;
@@ -145,13 +150,24 @@ var_dump($prfx_stored_meta['video-icon-text']);
 
 /**repeatable custommetabox test*/
 
-
+function hhs_get_sample_options() {
+	$options = array (
+		'Option 1' => 'option1',
+		'Option 2' => 'option2',
+		'Option 3' => 'option3',
+		'Option 4' => 'option4',
+	);
+	
+	return $options;
+}
+ 
 function repeatable_meta_box_display() {
 	global $post;
  
 	$repeatable_fields = get_post_meta($post->ID, 'repeatable_fields', true);
  
- 
+ 	$options = hhs_get_sample_options();
+
 	wp_nonce_field( 'repeatable_meta_box_nonce', 'repeatable_meta_box_nonce' );
 ?>
 	
@@ -167,7 +183,15 @@ function repeatable_meta_box_display() {
 
 		<li> <b>Title:</b> <input type="text" class="widefat" name="wrapper-title[]" value="<?php if($field['wrapper-title'] != '') echo esc_attr( $field['wrapper-title'] ); ?>" /></li>
  
-		<li><input type="text" class="widefat" name="wrapper-icon[]" value="<?php if ($field['wrapper-icon'] != '') echo esc_attr( $field['wrapper-icon'] );  ?>" /></li>
+ <li><select name="select[]">
+			<?php foreach ( $options as $label => $value ) : ?>
+			<option value="<?php echo $value; ?>"<?php selected( $field['select'], $value ); ?>><?php echo $label; ?></option>
+			<?php endforeach; ?>
+			</select>
+            </li> 
+    
+    
+ 
 				<li><a class="button remove-row" href="#">Remove the Wrapper</a></li>
 
 	</ul>	<?php
@@ -181,7 +205,14 @@ function repeatable_meta_box_display() {
 		<li><input type="text" class="widefat" name="wrapper-title[]" /></li>
  
  
-		<li><input type="text" class="widefat" name="wrapper-icon[]" value="http://" /></li>
+		<li><select name="select[]">
+			<?php foreach ( $options as $label => $value ) : ?>
+			<option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+			<?php endforeach; ?>
+			</select>
+		</td>
+        </select>
+        </li>
 				<li><a class="button remove-row" href="#">Remove</a></li>
 
 	</ul>
@@ -195,7 +226,11 @@ function repeatable_meta_box_display() {
 		<li><input type="text" class="widefat" name="wrapper-title[]" /></li>
  
  
-		<li><input type="text" class="widefat" name="wrapper-icon[]" value="http://" /></li>
+	<li><select name="select[]">
+			<?php foreach ( $options as $label => $value ) : ?>
+			<option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+			<?php endforeach; ?>
+			</select></li>
 				<li><a class="button remove-row" href="#">Remove</a></li>
 
 	</ul>
@@ -213,6 +248,7 @@ function repeatable_meta_box_display() {
 					  
 
 }
+ 
  
 
 
@@ -263,9 +299,11 @@ function repeatable_meta_box_save($post_id) {
  
 	$old = get_post_meta($post_id, 'repeatable_fields', true);
 	$new = array();
- 
+	$options = hhs_get_sample_options();
+
  
 	$wrappertitles = $_POST['wrapper-title'];
+	$selects = $_POST['select'];
 	$wrappericons = $_POST['wrapper-icon'];
  
 	$count = count( $wrappertitles );
@@ -275,10 +313,11 @@ function repeatable_meta_box_save($post_id) {
 		if ( $wrappertitles[$i] != '' ) :
 			$new[$i]['wrapper-title'] = stripslashes( strip_tags( $wrappertitles[$i] ) );
  
- if ( $wrappericons[$i] == '' )
-			$new[$i]['wrapper-icon'] = '';
-		else
-			$new[$i]['wrapper-icon'] = stripslashes( $wrappericons[$i] ); // and however you want to sanitize
+if ( in_array( $selects[$i], $options ) )
+				$new[$i]['select'] = $selects[$i];
+			else
+				$new[$i]['select'] = '';
+		
 		endif;
 	}
  
