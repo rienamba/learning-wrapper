@@ -205,6 +205,7 @@ function repeatable_meta_box_display() {
 	<input type="submit" class="metabox_submit" value="Save" />
 	</p>
 	    </div>
+        
 <?php
 
 	var_dump ($field['wrapper-title']);
@@ -248,7 +249,6 @@ function wrapper_prfx_meta_save( $post_id ) {
 	
 	
 }
-
 add_action('save_post', 'repeatable_meta_box_save');
 function repeatable_meta_box_save($post_id) {
 	if ( ! isset( $_POST['repeatable_meta_box_nonce'] ) ||
