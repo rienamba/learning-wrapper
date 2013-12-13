@@ -116,21 +116,11 @@ global $post;
                    <option value="icon-pencil" <?php if ( isset ( $prfx_stored_meta['video-icon-select'] ) ) selected( $prfx_stored_meta['video-icon-select'][0], 'icon-pencil' ); ?>><?php _e( 'Pencil', 'prfx-textdomain' )?></option>';          
                     <option value="icon-mail" <?php if ( isset ( $prfx_stored_meta['video-icon-select'] ) ) selected( $prfx_stored_meta['video-icon-select'][0], 'icon-mail' ); ?>><?php _e( 'Mail', 'prfx-textdomain' )?></option>';          
                    <option value="icon-signal" <?php if ( isset ( $prfx_stored_meta['video-icon-select'] ) ) selected( $prfx_stored_meta['video-icon-select'][0], 'icon-signal' ); ?>><?php _e( 'Signal', 'prfx-textdomain' )?></option>';          
-                    <option value="icon-other" <?php if ( isset ( $prfx_stored_meta['video-icon-select'] ) ) selected( $prfx_stored_meta['video-icon-select'][0], 'icon-other' ); ?>><?php _e( 'Other', 'prfx-textdomain' )?></option>';          
              
                 </select>
                 
                 
         </p>
-<p><div class="icon_manual">
-
-
-Add the icon manually here: <label for="meta-text" class="prfx-row-title"><?php _e( 'Menu title', 'prfx-textdomain' )?></label>
-            
-  <input type="text" name="video-icon-text" id="meta-text" value="<?php if ( isset ( $prfx_stored_meta['video-icon-text'] ) ) echo $prfx_stored_meta['video-icon-text'][0]; ?> " />
-
-</div>
-</p>
 
 
 	 
@@ -144,21 +134,23 @@ Add the icon manually here: <label for="meta-text" class="prfx-row-title"><?php 
 var_dump($prfx_stored_meta['video-wrapper-title']);
 
 var_dump($prfx_stored_meta['video-icon-select']);
-var_dump($prfx_stored_meta['video-icon-text']);
 
 }
 
 /**repeatable custommetabox test*/
 
 function hhs_get_sample_options() {
-	$options = array (
-		'Option 1' => 'option1',
-		'Option 2' => 'option2',
-		'Option 3' => 'option3',
-		'Option 4' => 'option4',
+	$wrappericons = array (
+		'Play Button' => 'icon-play',
+		'Checkbox' => 'icon-checkbox',
+		'Book' => 'icon-book',
+		'Comment' => 'icon-comment',
+		'Pencil' =>'icon-pencil',
+		'Signal' =>'icon-signal',
+		
 	);
 	
-	return $options;
+	return $wrappericons;
 }
  
 function repeatable_meta_box_display() {
@@ -166,7 +158,7 @@ function repeatable_meta_box_display() {
  
 	$repeatable_fields = get_post_meta($post->ID, 'repeatable_fields', true);
  
- 	$options = hhs_get_sample_options();
+ 	$wrappericons = hhs_get_sample_options();
 
 	wp_nonce_field( 'repeatable_meta_box_nonce', 'repeatable_meta_box_nonce' );
 ?>
@@ -184,7 +176,7 @@ function repeatable_meta_box_display() {
 		<li> <b>Title:</b> <input type="text" class="widefat" name="wrapper-title[]" value="<?php if($field['wrapper-title'] != '') echo esc_attr( $field['wrapper-title'] ); ?>" /></li>
  
  <li><select name="select[]">
-			<?php foreach ( $options as $label => $value ) : ?>
+			<?php foreach ( $wrappericons as $label => $value ) : ?>
 			<option value="<?php echo $value; ?>"<?php selected( $field['select'], $value ); ?>><?php echo $label; ?></option>
 			<?php endforeach; ?>
 			</select>
@@ -202,11 +194,11 @@ function repeatable_meta_box_display() {
 	<ul>
     <div class="sort">Wrapper</div>
 
-		<li><input type="text" class="widefat" name="wrapper-title[]" /></li>
+		<li><b>Title:</b> <input type="text" class="widefat" name="wrapper-title[]" /></li>
  
  
-		<li><select name="select[]">
-			<?php foreach ( $options as $label => $value ) : ?>
+		<li><b>Icon:</b> <select name="select[]">
+			<?php foreach ( $wrappericons as $label => $value ) : ?>
 			<option value="<?php echo $value; ?>"><?php echo $label; ?></option>
 			<?php endforeach; ?>
 			</select>
@@ -223,11 +215,11 @@ function repeatable_meta_box_display() {
 	<ul class="empty-row screen-reader-text">
      <div class="sort">Wrapper</a></div>
 
-		<li><input type="text" class="widefat" name="wrapper-title[]" /></li>
+		<li><b>Title:</b><input type="text" class="widefat" name="wrapper-title[]" /></li>
  
  
-	<li><select name="select[]">
-			<?php foreach ( $options as $label => $value ) : ?>
+	<li><b>Icon:</b><select name="select[]">
+			<?php foreach ( $wrappericons as $label => $value ) : ?>
 			<option value="<?php echo $value; ?>"><?php echo $label; ?></option>
 			<?php endforeach; ?>
 			</select></li>
@@ -270,9 +262,7 @@ function wrapper_prfx_meta_save( $post_id ) {
         if( isset( $_POST[ 'video-wrapper-title' ] ) ) {
                 update_post_meta( $post_id, 'video-wrapper-title', sanitize_text_field( $_POST[ 'video-wrapper-title' ] ) );
         }
-		if( isset( $_POST[ 'video-icon-text' ] ) )  {
-                update_post_meta( $post_id, 'video-icon-text', sanitize_text_field( $_POST[ 'video-icon-text' ] ) );
-        }
+	
 		
 	
 /*Saves dropdown menu save data */	
@@ -299,7 +289,7 @@ function repeatable_meta_box_save($post_id) {
  
 	$old = get_post_meta($post_id, 'repeatable_fields', true);
 	$new = array();
-	$options = hhs_get_sample_options();
+	$wrappericons = hhs_get_sample_options();
 
  
 	$wrappertitles = $_POST['wrapper-title'];
@@ -313,7 +303,7 @@ function repeatable_meta_box_save($post_id) {
 		if ( $wrappertitles[$i] != '' ) :
 			$new[$i]['wrapper-title'] = stripslashes( strip_tags( $wrappertitles[$i] ) );
  
-if ( in_array( $selects[$i], $options ) )
+if ( in_array( $selects[$i], $wrappericons ) )
 				$new[$i]['select'] = $selects[$i];
 			else
 				$new[$i]['select'] = '';

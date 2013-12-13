@@ -1,19 +1,6 @@
-// Java Document
-jQuery(document).ready(function($) {
 
-        $("select#meta-select-icon").change(function(){
-			if ($('option:selected', this).val() == 'icon-other') {
-                    $(".icon_manual").show();
-            } else {
-							$(".icon_manual").hide();
-
-			}
-           });
 		
 		
-		
-		
-    });	
 /*Make the Post Metadata Field Repeatable*/
 jQuery(document).ready(function($) {
 	$('.metabox_submit').click(function(e) {
