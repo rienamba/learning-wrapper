@@ -181,6 +181,13 @@ function repeatable_meta_box_display() {
 			<?php endforeach; ?>
 			</select>
             </li> 
+  <li> 
+  <b>Description:</b>
+  <input type="text" class="widefat" name="wrapper-content[]" value="<?php if($field['wrapper-content'] != '') echo esc_attr( $field['wrapper-content'] ); ?>" />
+  
+  
+  </li>
+            
     
     
  
@@ -203,8 +210,13 @@ function repeatable_meta_box_display() {
 			<?php endforeach; ?>
 			</select>
 		</td>
-        </select>
+        </select>     
         </li>
+          <li> 
+  <b>Description:</b><input type="text" class="widefat" name="wrapper-content[]" />  
+  
+  </li>
+        
 				<li><a class="button remove-row" href="#">Remove</a></li>
 
 	</ul>
@@ -223,6 +235,9 @@ function repeatable_meta_box_display() {
 			<option value="<?php echo $value; ?>"><?php echo $label; ?></option>
 			<?php endforeach; ?>
 			</select></li>
+            
+      <li><b>Description:</b><input type="text" class="widefat" name="wrapper-content[]" /></li>
+
 				<li><a class="button remove-row" href="#">Remove</a></li>
 
 	</ul>
@@ -237,7 +252,8 @@ function repeatable_meta_box_display() {
 
 	var_dump ($field['wrapper-title']);
 	var_dump ($field['wrapper-icon']);
-					  
+		var_dump ($field['wrapper-content']);
+				  
 
 }
  
@@ -293,6 +309,8 @@ function repeatable_meta_box_save($post_id) {
 
  
 	$wrappertitles = $_POST['wrapper-title'];
+	$wrappercontents = $_POST['wrapper-content'];
+
 	$selects = $_POST['select'];
 	$wrappericons = $_POST['wrapper-icon'];
  
@@ -302,7 +320,10 @@ function repeatable_meta_box_save($post_id) {
 	for ( $i = 0; $i < $count; $i++ ) {
 		if ( $wrappertitles[$i] != '' ) :
 			$new[$i]['wrapper-title'] = stripslashes( strip_tags( $wrappertitles[$i] ) );
- 
+ if ( $wrappercontents[$i] != '' ) :
+			$new[$i]['wrapper-content'] = stripslashes( strip_tags( $wrappercontents[$i] ) );
+			
+			endif;
 if ( in_array( $selects[$i], $wrappericons ) )
 				$new[$i]['select'] = $selects[$i];
 			else
