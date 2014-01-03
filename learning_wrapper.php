@@ -183,8 +183,7 @@ function repeatable_meta_box_display() {
             </li> 
   <li> 
   <b>Description:</b>
-  <textarea class="widefat" name="wrapper-content[]" />
- <?php if($field['wrapper-content'] != '') echo esc_attr( $field['wrapper-content'] ); ?> </textarea>
+  <textarea class="widefat" name="wrapper-content[]" /><?php if($field['wrapper-content'] != '') echo esc_attr( $field['wrapper-content'] ); ?> </textarea>
   
   </li>
             
@@ -213,7 +212,7 @@ function repeatable_meta_box_display() {
         </select>     
         </li>
           <li> 
-  <b>Description:</b><textarea class="widefat" name="wrapper-content[]" /> </textarea> 
+  <b>Description:</b><textarea class="widefat" name="wrapper-content[]" /></textarea> 
   
   </li>
         
