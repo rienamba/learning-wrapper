@@ -25,4 +25,4 @@ jQuery(document).ready(function($) {
 		handle: '.sort'
 	});
 });
-						
+
