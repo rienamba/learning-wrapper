@@ -18,11 +18,23 @@ jQuery(document).ready(function($) {
 		return false;
 	});
  
-	$('#repeatable-fieldset-one').sortable({
-		opacity: 0.6,
-		revert: true,
-		cursor: 'move',
-		handle: '.sort'
-	});
+
 });
 						
+ jQuery(function($)
+        {
+            var i=1;
+            $('.widefat textarea').each(function(e)
+            {
+                var id = $(this).attr('id');
+ 
+                if (!id)
+                {
+                    id = 'customEditor-' + i++;
+                    $(this).attr('id',id);
+                }
+ 
+                tinyMCE.execCommand('mceAddControl', false, id);
+                 
+            });
+        });
