@@ -20,6 +20,7 @@ jQuery(document).ready(function($) {
  
 
 });
+<<<<<<< HEAD
 						
  jQuery(function($)
         {
@@ -38,3 +39,6 @@ jQuery(document).ready(function($) {
                  
             });
         });
+=======
+
+>>>>>>> 3e0e3b1acfe3c183c2af7bf8feceffbc5e1fd429
