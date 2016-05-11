@@ -1,14 +1,7 @@
 learning-wrapper
 ================
 
-A plugin that creates a Custom Post Type - Learning Wrapper which will allow users to easily add a Learning Wrapper to the UBC CMS website . 
+It is a template that is based on HTML/CSS/JavaScript which allows you to easily add a wrapper for the video.
+An Example can be seen in: http://digitaltattoo.ubc.ca/protect/usa-surveillance-programs/
 
-An Example of Learning Wrapper can be seen in the Digital Tattoo Website:
-http://digitaltattoo.ubc.ca/protect/protect-feature/
-
-
-
-**List of Reference Used**:
-
-* *Theme Foundation* - Wordpress Metaboxes: A Comprehensive Developer's Guide - http://themefoundation.com/wordpress-meta-boxes-guide/
-* *Gist by Helen Hou-Sandi* https://gist.github.com/helenhousandi/1593065
+For the concept of Learning Wrapper, see http://wiki.ubc.ca/Documentation:Learning_Wrapper_Definition

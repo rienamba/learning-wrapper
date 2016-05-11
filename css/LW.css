@@ -1,0 +1,86 @@
+/*Learning Wrapper CSS*/
+/*Learning Wrapper CSS- Navigation Start*/
+.select {
+    color: #009900;
+/*changes color when you select the menu*/;
+}
+
+ul.LWtab {
+    margin-left: 0;
+    margin-top: 20px;
+    font-size: 23px;
+    color: #363636;
+}
+
+ul.LWtab li {
+    list-style: none;
+    line-height: 30px;
+    display: block;
+    background: #F5F2F2;
+ /*sets a background color of the menu*/
+    padding: 10px;
+    margin-top: 3px;
+}
+
+ul.LWtab li:hover {
+    background-color: #EDE8E8;
+/*It changes background color when you mouseover the menu*/
+    cursor: pointer;
+}
+
+.disnon {
+    display: none;
+}
+
+.LWsidebar {
+    display: block;
+    width: 100%;
+    float: right;
+}
+/*Learning Wrapper CSS- Navigation End */    
+/*Learning Wrapper CSS - Main Content Start */    
+.maincontent {
+    display: block;
+    float: left;
+    width: 100%;
+}
+
+.content_wrap {
+    width: 95%;
+}
+    
+/*Learning Wrapper CSS - Main Content  End*/    
+
+/*learning Wrapper CSS - Mobile view -  Start*/        
+@media (max-width:767px) {
+    .LWmenu{
+        display: block;
+        width: 100%;
+        float: left;
+    }
+
+    ul.LWtab li {
+        list-style: none;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        font-size: 16px;
+        float: left;
+        margin: 2px;
+    }
+
+    .content_wrap {
+        width: 100%;
+    }
+
+    .maincontent {
+        display: block;
+        float: left;
+        width: 100%;
+    }
+
+    ul.LWtab li.hidemobile {
+        display: none;
+    }
+}
