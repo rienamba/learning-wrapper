@@ -1,44 +1,37 @@
+/*Script to make sure there's no conflict with Jquery*/
+var $j = jQuery.noConflict();
 
-		
-		
-/*Make the Post Metadata Field Repeatable*/
-jQuery(document).ready(function($) {
-	$('.metabox_submit').click(function(e) {
-		e.preventDefault();
-		$('#publish').click();
-	});
-	$('#add-row').on('click', function() {
-		var row = $('.empty-row.screen-reader-text').clone(true);
-		row.removeClass('empty-row screen-reader-text');
-		row.insertBefore('#repeatable-fieldset-one>ul:last');
-		return false;
-	});
-	$('.remove-row').on('click', function() {
-		$(this).parents('ul').remove();
-		return false;
-	});
- 
+/*script for tabs*/
+$j(function() {
 
+    $j(".LWtab li").click(function() {
+        var num = $j(".LWtab li").index(this);
+        $j(".content_wrap").addClass('disnon');
+        $j(".content_wrap").eq(num).removeClass('disnon');
+        $j(".LWtab li").removeClass('select');
+        $j(this).addClass('select')
+    });
 });
-<<<<<<< HEAD
-						
- jQuery(function($)
-        {
-            var i=1;
-            $('.widefat textarea').each(function(e)
-            {
-                var id = $(this).attr('id');
- 
-                if (!id)
-                {
-                    id = 'customEditor-' + i++;
-                    $(this).attr('id',id);
-                }
- 
-                tinyMCE.execCommand('mceAddControl', false, id);
-                 
-            });
-        });
-=======
 
->>>>>>> 3e0e3b1acfe3c183c2af7bf8feceffbc5e1fd429
+/*The following Javascript will only be enabled if the viewer is on Tablet,  Laptop or  Desktop*/  
+var windowWidth = $j(window).width();
+if(windowWidth > 767){
+/*Video& Menu will be on the sidebar when clicked*/
+        $j(".videoside").click(function(){
+          
+          $j(".LWsidebar").css("width", "30%");
+          $j(".maincontent").css("width", "70%");
+          location.href = '#';
+        });
+
+/*Video& Menu will not be on the side bar when clicked*/
+ $j(".videobig").click(function(){
+          
+          $j(".LWsidebar").css("width", "100%");
+          $j(".maincontent").css("width", "100%");
+      location.href = '#';
+   
+        });
+
+}
+
